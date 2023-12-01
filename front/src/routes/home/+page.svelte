@@ -1,4 +1,12 @@
- 
+<script>
+  let clientes = [
+    { Nome: 'Cliente 1', Endereco: 'Rua A, 123' },
+    { Nome: 'Cliente 2', Endereco: 'Rua B, 456' },
+    { Nome: 'Cliente 3', Endereco: 'Rua C, 789' },
+    { Nome: 'Cliente 4', Endereco: 'Rua D, 101' },
+    { Nome: 'Cliente 5', Endereco: 'Rua E, 112' }
+  ];
+  </script>
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +16,7 @@
 <body>
 
   <nav class="navbar">
-     <img>
+ 
     <ul class="nav-list">
       <li><a href="/home">Home</a></li>
       <li><a href="/home">Cadastrar novo cliente</a></li>
@@ -19,22 +27,44 @@
       <button>Buscar</button>
     </div>
   </nav>
+  
+  
 
   <!-- Conteúdo da página aqui -->
 
-</body>
+</body> 
+  <div class="client-list">
+    <div class="tab-pane fade show active" id="nav-clientes" role="tabpanel" aria-labelledby="nav-clientes-tab" tabindex="0">
+      <!-- <div class="row">
+          <div class="col-12 mb-3" style="display: flex; place-content: space-between;">
+              <h2><b>Clientes</b></h2>
 
-<div class="client-list">
-    <h2>Clientes Cadastrados</h2>
-  
-    <!-- Verifica se há clientes cadastrados -->
-    <ul>
-      <!-- Exemplo de cliente cadastrado -->
-      <li>Nome do Cliente 1</li>
-      <li>Nome do Cliente 2</li>
- 
-      <li class="empty-message">Nenhum cliente cadastrado no momento.</li>
-    </ul>
+          </div>
+      </div> -->
+      <div class="col-12">
+        <table class="table table-bordered table-striped" width="100%" style="box-shadow: 0 10px 40px #00000056;">
+            <thead>
+                <tr>
+                    <th class="text-center">Nome</th>
+                    <th class="text-center">Endereço</th>
+                     <th class="text-center">#</th>
+                </tr>
+            </thead>
+            <tbody>
+                {#each clientes as cliente, i(cliente)}
+                    <tr>
+                        <td style="text-align: center;">{cliente.Nome}</td>
+                        <td style="text-align: center;">{cliente.Endereco}</td>
+                        <td style="text-align: center;">  
+                            <button  class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></button>
+                            <button   class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button> 
+                        </td>
+                    </tr>
+                {/each}
+            </tbody>
+        </table>
+    </div>
+    </div>
   </div>
 
 <style>
@@ -90,36 +120,19 @@
   cursor: pointer;
   
 }
+ 
 
-/* ... (estilos do navbar) ... */
-
+ 
 .client-list {
   max-width: 800px;
   margin: auto;
   padding: 20px;
 }
 
-.client-list h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
 
-.client-list ul {
-  list-style: none;
-  padding: 0;
-}
 
-.client-list li {
-  margin-bottom: 8px;
-}
 
-.client-list .empty-message {
-  color: #777;
-  font-style: italic;
-}
-
-/* ... (restante dos estilos) ... */
-
+ 
 
 </style>
  
