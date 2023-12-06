@@ -1,6 +1,6 @@
 import axios from 'axios';
-//var host = import.meta.env.VITE_HOST;
-var host = "http://localhost/KABUM/back/api";
+var host = import.meta.env.VITE_HOST;
+//var host = "http://localhost/KABUM/back/api";
 
 
 

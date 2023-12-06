@@ -1,6 +1,4 @@
 <?php
- include_once ("../config/session_create.php");
-
 include_once '../config/database.php';
 include_once '../model/usuario-model.php';
 header("Access-Control-Allow-Origin: *");
@@ -40,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         } 
     }else if ($dados['acao'] == 'login') {
         if ($dados) {
-            $res = $usuarioModel->login($dados);
+             $res = $usuarioModel->login($dados);
             echo json_encode($res);
         } else {
             http_response_code(400); 

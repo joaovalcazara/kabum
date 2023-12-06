@@ -1,9 +1,8 @@
 <?php
  include_once ("../config/session_create.php");
  include_once '../config/database.php';
- 
 
-class ClienteModel {
+ class ClienteModel {
 
     private $conn;
 
@@ -13,8 +12,8 @@ class ClienteModel {
     }
 
     public function listarClientes() { 
-        echo $_SESSION['usuario'];
          try {
+             session_start();
              if (isset($_SESSION['usuario'])) {
                 $idUser = $_SESSION['user']; 
                 $sql = "SELECT c.* FROM cliente c WHERE idUsuario = $idUser ORDER BY c.idCliente";

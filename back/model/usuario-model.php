@@ -1,5 +1,5 @@
 <?php
-include ("../config/session_create.php");
+include_once  ("../config/session_create.php");
 include_once '../config/database.php';
 
 
@@ -31,7 +31,7 @@ class UsuarioModel {
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC); 
-            $_SESSION['usuario'] =$usuario['idUsuario']; 
+            $_SESSION['usuario'] = $usuario['idUsuario']; 
             return $usuario;       
         }  
 

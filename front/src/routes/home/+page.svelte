@@ -77,26 +77,7 @@
           </tr>
         </thead>
         <tbody>
-          {#if clientes.length > 0}
-            {#each clientes as cliente (cliente)}
-            <tr class="client-row">
-              <td style="text-align: center;">{cliente.Nome}</td>
-              <td style="text-align: center;">{cliente.Cpf}</td>
-              <td style="text-align: center;">
-                <button on:click={() => editCliente(cliente)}>
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                <button on:click={() => deleteCliente(cliente)}>
-                  <i class="fas fa-trash" style="color: red;"></i>
-                </button>
-              </td>
-            </tr>
-            {/each}
-          {:else}
-          <tr>
-            <td colspan="2" class="text-center">Nenhum cliente encontrado.</td>
-          </tr>
-          {/if}
+      
         </tbody>
       </table>
     </div>

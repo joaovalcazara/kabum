@@ -1,11 +1,11 @@
 import axios from 'axios';
+var host = import.meta.env.VITE_HOST;
 
-const host = "http://localhost/KABUM/back/api";
+//const host = "http://localhost/KABUM/back/api";
 
 export const serviceGetClientes = async () => { 
     try {
-        // Utilizando axios.get corretamente
-        let res = await axios.get(`${host}/clientes.php`, {
+         let res = await axios.get(`${host}/clientes.php`, {
             params: {
                 acao: "listarClientes"
             }
