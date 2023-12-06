@@ -1,6 +1,15 @@
-<!-- <script>
-    import "../app.scss";
+<script>
+    import { isAuthenticated } from '../auth';
+  
+    // Check authentication on layout load
+    isAuthenticated();
   </script>
   
-  <slot />
-   -->
+ 
+  <main>
+    <slot />
+  </main>
+  
+  <style>
+    /* Your layout styles here */
+  </style>

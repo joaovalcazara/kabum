@@ -6,7 +6,7 @@ var host = "http://localhost/KABUM/back/api";
 
 export const cadastarUser = async (user) => { 
      try {
-        let res = await axios.post('http://localhost/KABUM/back/api/usuarios.php', user, {
+        let res = await axios.post(host+'/usuarios.php', user, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -20,7 +20,7 @@ export const cadastarUser = async (user) => {
 
 export const login = async (user) => { 
     try {
-       let res = await axios.post('http://localhost/KABUM/back/api/usuarios.php', user, {
+       let res = await axios.post(host+'/usuarios.php', user, {
            headers: {
                'Content-Type': 'application/json'
            }
@@ -31,3 +31,20 @@ export const login = async (user) => {
        return error.response
    }
 };
+
+export const serviceLogout = async () => {
+    try {
+       const res = await axios.post(`${host}/logout.php`);
+       sessionStorage.removeItem('user');
+       window.location.href = '/login'; 
+      if (res.data.success) {
+         
+       } else {
+        return false;
+      }
+    } catch (error) {
+      console.error("Erro ao fazer logout:", error);
+      throw error;
+    }
+  };
+  

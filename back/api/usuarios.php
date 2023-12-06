@@ -1,4 +1,6 @@
 <?php
+ include_once ("../config/session_create.php");
+
 include_once '../config/database.php';
 include_once '../model/usuario-model.php';
 header("Access-Control-Allow-Origin: *");

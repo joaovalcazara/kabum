@@ -51,7 +51,7 @@
     justify-content: center;
     width: 100%;
     height: 100vh;
-    background-color: #7532e2;
+    background-color: #ffffff;
   }
 
   .formCadastrar {

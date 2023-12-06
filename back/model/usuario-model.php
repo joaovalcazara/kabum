@@ -1,5 +1,7 @@
 <?php
+include ("../config/session_create.php");
 include_once '../config/database.php';
+
 
 class UsuarioModel {
 
@@ -7,6 +9,7 @@ class UsuarioModel {
 
     public function __construct($conn) {
         $this->conn = $conn;
+
     }
 
     public function getUsuario($idUsuario) {
@@ -27,7 +30,8 @@ class UsuarioModel {
         $stmt->bindParam(':senha', $dados['senha']);
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
-            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC); 
+            $_SESSION['usuario'] =$usuario['idUsuario']; 
             return $usuario;       
         }  
 
@@ -85,5 +89,5 @@ class UsuarioModel {
             error_log("Erro ao excluir usuário: " . $e->getMessage());
             return false;
         }
-    }
+    } 
 }

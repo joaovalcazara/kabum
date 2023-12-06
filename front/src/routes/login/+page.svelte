@@ -2,6 +2,7 @@
   import { goto } from "$app/navigation";
   import { login } from "../../services/user.js";
   import { onMount } from "svelte";
+  import '@fortawesome/fontawesome-free/css/all.css';
 
   let loading = false;
   let usuario = {};
@@ -13,20 +14,20 @@
   const logar = async () => {
     usuario.acao = "login";
     loading = true;
-    try {
-
+    try { 
       let returnLogin = await login(usuario);
-      if (returnLogin.status == 200) {
+       if (returnLogin.status == 200 && returnLogin.data != null) {
         var userReturn = {
           Nome: returnLogin?.data?.Nome,
           Email: returnLogin?.data?.Email,
           id: returnLogin?.data?.idUsuario,
         };
-        console.log(returnLogin);
-        sessionStorage.setItem("user", JSON.stringify(userReturn));
+         sessionStorage.setItem("user", JSON.stringify(userReturn));
         setTimeout(() => {
           goto("/home");
-        }, 2000);
+        }, 1000);
+      }else{
+        alert("E-mail ou senha incorretos");
       }
     }finally {
       loading = false;
@@ -88,7 +89,7 @@
     justify-content: center;
     width: 100%;
     height: 100vh;
-    background-color: #7532e2;
+    background-color: #ffffff;
   }
 
   .formLogin {
