@@ -5,17 +5,21 @@ var host = import.meta.env.VITE_HOST;
 
 export const serviceGetClientes = async () => { 
     try {
-         let res = await axios.get(`${host}/clientes.php`, {
+        let res = await axios.get(`${host}/clientes.php`, {
             params: {
                 acao: "listarClientes"
-            }
+            } ,
+            withCredentials: true  
         });
-        return res.data;  
+
+        // Se você achar necessário desconverter manualmente
+         return res.data;
     } catch (error) {
         console.error("Erro ao obter clientes:", error);
         throw error;  
     }
 };
+
 export const serviceGetCliente = async (idCliente) => {
     try {
         // Utilizando axios.get corretamente
@@ -23,7 +27,8 @@ export const serviceGetCliente = async (idCliente) => {
             params: {
                 acao: "getCliente",
                 idCliente: idCliente  
-            }
+            },
+            withCredentials: true  
         });
         return res.data;
     } catch (error) {
@@ -39,7 +44,8 @@ export const serviceCadastrarCliente = async (cliente) => {
                 let res = await axios.post(`${host}/clientes.php`, cliente, {
                     headers: {
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    withCredentials: true  
                 });
                 return res
             } catch (error) {
@@ -50,7 +56,8 @@ export const serviceCadastrarCliente = async (cliente) => {
             let res = await axios.put(`${host}/clientes.php`, cliente, {
                 headers: {
                 'Content-Type': 'application/json'
-                }
+                },
+                withCredentials: true  
             });
             return res;
             } catch (error) {

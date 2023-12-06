@@ -1,7 +1,6 @@
 <?php
  include_once ("../config/session_create.php");
  include_once '../config/database.php';
-
  class ClienteModel {
 
     private $conn;
@@ -12,10 +11,11 @@
     }
 
     public function listarClientes() { 
+        var_dump($_SESSION);
+
          try {
-             session_start();
-             if (isset($_SESSION['usuario'])) {
-                $idUser = $_SESSION['user']; 
+              if (isset($_SESSION['usuario'])) {
+                $idUser = $_SESSION['usuario']; 
                 $sql = "SELECT c.* FROM cliente c WHERE idUsuario = $idUser ORDER BY c.idCliente";
                 $stmt = $this->conn->query($sql);
                 $clientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -24,11 +24,8 @@
                     $sql = "SELECT * FROM endereco WHERE idCliente =" . $cliente['idCliente'];
                     $stmt = $this->conn->query($sql);
                     $cliente['endereco'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                }
-    
-                unset($cliente);
-    
-                return $clientes;
+                } 
+                 return $clientes;
             } else {
                  return false;
             }

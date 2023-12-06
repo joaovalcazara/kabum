@@ -20,17 +20,19 @@ export const cadastarUser = async (user) => {
 
 export const login = async (user) => { 
     try {
-       let res = await axios.post(host+'/usuarios.php', user, {
-           headers: {
-               'Content-Type': 'application/json'
-           }
-       });
-      return res
-   } catch (error) {
-       console.log("cadastro: "+ error);
-       return error.response
-   }
+        let res = await axios.post(host+'/usuarios.php', user, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true  
+        });
+        return res;
+    } catch (error) {
+        console.log("cadastro: " + error);
+        return error.response;
+    }
 };
+
 
 export const serviceLogout = async () => {
     try {

@@ -1,10 +1,14 @@
 <?php
+ include_once ("../config/session_create.php");
+
  include_once '../config/database.php';
 include_once '../model/cliente-model.php';
  
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, PUT, DELETE");
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Methods: POST, PUT, DELETE,OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Credentials: true");
+
 
 
 $conn = Database::getConexao();
@@ -16,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
      $dados = $_GET; 
      if(isset($dados['acao']) && $dados['acao'] === "listarClientes") {
          $clientes = $clienteModel->listarClientes(); 
-         echo json_encode($clientes);
-    }else if(isset($dados['acao']) && $dados['acao'] === "getCliente"){
+         echo json_encode($clientes); exit;	
+     }else if(isset($dados['acao']) && $dados['acao'] === "getCliente"){
         $cliente = $clienteModel->getCliente($dados['idCliente']); 
         echo json_encode($cliente);
    }

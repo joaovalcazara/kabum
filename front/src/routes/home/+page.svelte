@@ -6,14 +6,21 @@
   import { goto } from "$app/navigation";
   import '@fortawesome/fontawesome-free/css/all.css';
 
-  let clientes = [];
+  let clientes = [
+
+  ];
 
   onMount(async () => {
     getClientes();
   }); 
   const getClientes = async () => {
-    clientes = await serviceGetClientes();
-   };
+    try {
+      clientes = await serviceGetClientes();
+      console.log("Clientes:", clientes);
+    } catch (error) {
+      console.error("Erro ao obter clientes:", error);
+    }
+  };
 
   const editCliente = async (cliente) => {
     if (cliente) sessionStorage.setItem('idCliente', JSON.stringify(cliente.idCliente));
@@ -77,8 +84,30 @@
           </tr>
         </thead>
         <tbody>
-      
+          {#if clientes.length > 0}
+            {#each clientes as cliente (cliente.idCliente)}
+              {#if cliente}
+                <tr class="client-row">
+                  <td style="text-align: center;">{cliente.Nome}</td>
+                  <td style="text-align: center;">{cliente.Cpf}</td>
+                  <td style="text-align: center;">
+                    <button on:click={() => editCliente(cliente)}>
+                      <i class="fas fa-pencil-alt"></i>
+                    </button>
+                    <button on:click={() => deleteCliente(cliente)}>
+                      <i class="fas fa-trash" style="color: red;"></i>
+                    </button>
+                  </td>
+                </tr>
+              {/if}
+            {/each}
+          {:else}
+            <tr>
+              <td colspan="2" class="text-center">Nenhum cliente encontrado.</td>
+            </tr>
+          {/if}
         </tbody>
+        
       </table>
     </div>
   </div>
