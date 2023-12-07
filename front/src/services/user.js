@@ -4,7 +4,7 @@ var host = import.meta.env.VITE_HOST;
 
 
 
-export const cadastarUser = async (user) => { 
+export const cadastrarUsuario = async (user) => { 
      try {
         let res = await axios.post(host+'/usuarios.php', user, {
             headers: {

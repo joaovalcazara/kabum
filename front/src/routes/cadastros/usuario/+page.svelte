@@ -1,24 +1,66 @@
 <script>
-   import { cadastarUser} from '../../../services/user.js';
+   import { cadastrarUsuario} from '../../../services/user.js';
 
 
     let userCadastro = {}
     let returnCadastro
 
     const cadastrar = async () => {
-      returnCadastro = null
+    const camposNaoPreenchidos = verificaCamposObrigatorios();
+
+    if (camposNaoPreenchidos.length > 0) {
+      const mensagem = `Campos não preenchidos: ${camposNaoPreenchidos.join(', ')}`;
+      alert(mensagem);
+      return;
+    }
+
+    try {
       userCadastro.acao = "cadastrar";
-      returnCadastro = await cadastarUser(userCadastro);
+      const returnCadastro = await cadastrarUsuario(userCadastro);
+      console.log(returnCadastro)
+      if (returnCadastro.data.idUsuario == -1) {
+        alert("E-mail já cadastrado!");
+      } else if (returnCadastro.data.idUsuario) {
+        alert("Cadastro realizado com sucesso!");
+      } else {
+        alert(`Erro no cadastro: ${returnCadastro.message}`);
+      }
+    } catch (error) {
+      console.error("Erro inesperado:", error);
+      alert("Ocorreu um erro durante o cadastro. Por favor, tente novamente.");
+    }
+  };
+  const verificaCamposObrigatorios = () => {
+    const camposNaoPreenchidos = [];
 
-    };
+    // Verifica cada campo obrigatório
+    if (!userCadastro.nome || userCadastro.nome.trim() === '') {
+      camposNaoPreenchidos.push('Nome');
+    }
+    if (!userCadastro.email || userCadastro.email.trim() === '') {
+      camposNaoPreenchidos.push('Email');
+    }
+    if (!userCadastro.senha || userCadastro.senha.trim() === '') {
+      camposNaoPreenchidos.push('Senha');
+    }
+
+    return camposNaoPreenchidos;
+  };
+</script>
 
 
-  </script>
-  
+ 
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastrar usuário</title>
+  </head>
  
   <body> 
     <div class="page">
       <form class="formCadastrar">
+        <a href="/login">Voltar</a>
         <h1>Cadastro de usuário</h1>
 
         <label for="nome">Nome:</label>
@@ -31,6 +73,7 @@
         <input type="password" id="senha" bind:value={userCadastro.senha} required />
     
         <button on:click={() => cadastrar()}>Cadastrar</button>
+ 
       </form>
     </div>
   </body>

@@ -12,6 +12,16 @@
   const cpfMask = { 
 		mask: '000.000.000-00' 
 	};
+  const rgMask =  {
+            mask: '00.000.000-0'
+        };
+  const telefoneMask =  {
+            mask: '(00) 00000-0000' 
+          };
+
+   const cepMask =  {
+            mask: '00000-000'
+        };
  
    onMount(async () => {
     if (sessionStorage.getItem('idCliente')) {
@@ -61,7 +71,7 @@
               camposEnderecoNaoPreenchidos.push('Logradouro');
                 flag= true;
             }
-            if (!endereco.Numero || endereco.Numero.trim() === '') {
+            if (!endereco.Numero) {
               camposEnderecoNaoPreenchidos.push('Número');
                 flag= true;
             }
@@ -238,13 +248,13 @@ const mostrarMensagemErro = (mensagem) => {
                 <div class="col-12 col-md-4"> 
                   <div class="form-group form-outline">
                     <label class="form-group form-outline" for="rg">Rg*</label>
-                    <input bind:value={cliente.Rg} id="rg" type="text"   class="form-control form-control-lg"  >
+                    <input bind:value={cliente.Rg} use:imask={rgMask}  id="rg" type="text"   class="form-control form-control-lg"  >
                   </div>
                 </div>
                 <div class="col-12 col-md-4"> 
                   <div class="form-group form-outline">
                     <label class="form-group form-outline" for="rg">Telefone*</label>
-                    <input bind:value={cliente.Telefone} id="Telefone" type="text"   class="form-control form-control-lg"  >
+                    <input bind:value={cliente.Telefone} use:imask={telefoneMask}  id="Telefone" type="text"   class="form-control form-control-lg"  >
                   </div>
                 </div>
              </div>
@@ -264,7 +274,7 @@ const mostrarMensagemErro = (mensagem) => {
               <div class="col-12 col-md-4">
                 <div class="form-group form-outline">
                   <label for="CEP">CEP*</label>
-                  <input bind:value={end.Cep} id="CEP" type="text" class="form-control form-control-lg" on:blur={() => buscarEnderecoPorCEP(cliente.endereco[i].Cep, i)}>
+                  <input bind:value={end.Cep} use:imask={cepMask} id="CEP" type="text" class="form-control form-control-lg" on:blur={() => buscarEnderecoPorCEP(cliente.endereco[i].Cep, i)}>
                 </div>
               </div>
               <div class="col-12 col-md-4">

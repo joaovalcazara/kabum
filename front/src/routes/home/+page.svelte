@@ -1,7 +1,7 @@
 <script>
   import { serviceGetClientes,serviceDeleteCliente } from "../../services/cliente.js";
   import { serviceLogout} from "../../services/user.js";
-
+  import { imask, MaskedInput } from 'svelte-imask'; 
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
   import '@fortawesome/fontawesome-free/css/all.css';
@@ -9,6 +9,7 @@
   let clientes = [
 
   ];
+  let cpf;
 
   onMount(async () => {
     getClientes();
@@ -16,8 +17,7 @@
   const getClientes = async () => {
     try {
       clientes = await serviceGetClientes();
-      console.log("Clientes:", clientes);
-    } catch (error) {
+     } catch (error) {
       console.error("Erro ao obter clientes:", error);
     }
   };
@@ -43,6 +43,19 @@
     serviceLogout(); 
     window.location.reload();
    };
+
+   const cpfMask = { 
+		mask: '000.000.000-00' 
+	};
+  const buscarCliente = (cpf) => {
+     const clientesFiltrados = clientes.filter(cliente => cliente.Cpf === cpf);
+     clientes = clientesFiltrados; 
+  }
+  const excluirPesquisa = ( ) => {
+      cpf = null;
+      getClientes(); 
+  }
+ 
  
 </script>
 
@@ -60,14 +73,17 @@
       <ul class="nav-list">
         <li><a href="/home" style="color: darkcyan;">Home</a></li>
         <li><a on:click={() => editCliente()}>Cadastrar novo cliente</a></li>
-        <li><a on:click={() => deslogar()}>Deslogar</a></li>
-
+        <li><a on:click={() => deslogar()}>Deslogar</a></li> 
        </ul>
       <div class="search-bar">
-        <input type="text" placeholder="Pesquisar cliente CPF" />
-        <button>Buscar</button>
+      
+        <input type="text" use:imask={cpfMask} bind:value={cpf} placeholder="Pesquisar cliente CPF" /> 
+        <button on:click={() =>buscarCliente(cpf)}>Buscar</button> 
+        {#if cpf != null}
+          <button on:click={() => excluirPesquisa()}><i class="fas fa-trash" style="color: red;"></i></button>
+        {/if}
+       </div>
       </div>
-    </div>
   </nav>
 
   <!-- Conteúdo da página aqui -->

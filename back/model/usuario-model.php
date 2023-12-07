@@ -37,12 +37,29 @@ class UsuarioModel {
 
     }
 
+    public function emailJaCadastrado($email) {
+        try {
+            $stmt = $this->conn->prepare("SELECT COUNT(*) FROM usuario WHERE Email = :email");
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            
+            $result = $stmt->fetch(PDO::FETCH_COLUMN);
+    
+            return $result > 0;  
+        } catch (PDOException $e) {
+            echo "Erro: " . $e->getMessage();
+            return false;
+        }
+    }
+    
     public function adicionarUsuario($dados) {
-
+         if ($this->emailJaCadastrado($dados['email'])) {
+             return -1;  
+        }
+    
         try {
             $stmt = $this->conn->prepare("INSERT INTO usuario (Nome, Email, Senha) VALUES (:nome, :email, :senha)");
     
-     
             $stmt->bindParam(':nome', $dados['nome']);
             $stmt->bindParam(':email', $dados['email']);
             $stmt->bindParam(':senha', $dados['senha']);
@@ -52,10 +69,10 @@ class UsuarioModel {
             return $this->conn->lastInsertId();
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
-            return 0; // Ou algum valor que indique um erro no seu contexto.
+            return 0;  
         }
     }
-
+    
     public function editarUsuario($idUsuario, $novosDados) {
         $sql = "UPDATE usuario SET Nome = :nome, Email = :Email, Senha = :senha WHERE idUsuario = :id";
 
