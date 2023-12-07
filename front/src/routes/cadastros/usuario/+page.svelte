@@ -7,6 +7,7 @@
 
     const cadastrar = async () => {
       returnCadastro = null
+      userCadastro.acao = "cadastrar";
       returnCadastro = await cadastarUser(userCadastro);
 
     };

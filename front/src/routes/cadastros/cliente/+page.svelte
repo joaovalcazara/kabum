@@ -48,10 +48,55 @@
         camposNaoPreenchidos.push('Telefone');
     }
 
+    if (cliente.endereco.length > 0) {
+        cliente.endereco.forEach((endereco, index) => {
+          const camposEnderecoNaoPreenchidos = [];
+
+          let flag = false;
+            if (!endereco.Cep || endereco.Cep.trim() === '') {
+              camposEnderecoNaoPreenchidos.push('CEP');
+                flag= true;
+            }
+            if (!endereco.Logradouro || endereco.Logradouro.trim() === '') {
+              camposEnderecoNaoPreenchidos.push('Logradouro');
+                flag= true;
+            }
+            if (!endereco.Numero || endereco.Numero.trim() === '') {
+              camposEnderecoNaoPreenchidos.push('Número');
+                flag= true;
+            }
+            if (!endereco.Complemento || endereco.Complemento.trim() === '') {
+              camposEnderecoNaoPreenchidos.push('Complemento');
+                flag= true;
+            }
+            if (!endereco.Bairro || endereco.Bairro.trim() === '') {
+                camposEnderecoNaoPreenchidos.push('Bairro');
+                flag= true;
+            }
+            if (!endereco.Cidade || endereco.Cidade.trim() === '') {
+                camposEnderecoNaoPreenchidos.push('Cidade');
+                flag= true;
+            }
+            if (!endereco.Estado || endereco.Estado.trim() === '') {
+                camposEnderecoNaoPreenchidos.push('Estado');
+                flag= true;
+            }
+           
+           
+ 
+            if(flag){
+               camposNaoPreenchidos.push(`Endereço ${index + 1}: ${camposEnderecoNaoPreenchidos.join(', ')}`); 
+            }
+         });
+    }
+
+
     if (camposNaoPreenchidos.length > 0) {
         alert(`Campos obrigatórios não preenchidos: ${camposNaoPreenchidos.join(', ')}`);
         return false;
     }
+
+   
 
     return true;
 };
@@ -218,48 +263,48 @@ const mostrarMensagemErro = (mensagem) => {
             <div class="row"> 
               <div class="col-12 col-md-4">
                 <div class="form-group form-outline">
-                  <label for="CEP">CEP</label>
+                  <label for="CEP">CEP*</label>
                   <input bind:value={end.Cep} id="CEP" type="text" class="form-control form-control-lg" on:blur={() => buscarEnderecoPorCEP(cliente.endereco[i].Cep, i)}>
                 </div>
               </div>
               <div class="col-12 col-md-4">
                 <div class="form-group form-outline">
-                  <label for="Logradouro">Logradouro</label>
+                  <label for="Logradouro">Logradouro*</label>
                   <input bind:value={end.Logradouro} id="Logradouro" type="text" class="form-control form-control-lg">
                 </div>
               </div>
               
               <div class="col-12 col-md-4">
                 <div class="form-group form-outline">
-                  <label for="Numero">Número</label>
+                  <label for="Numero">Número*</label>
                   <input bind:value={end.Numero} id="Numero" type="number" class="form-control form-control-lg">
                 </div>
               </div>
               
               <div class="col-12 col-md-4">
                 <div class="form-group form-outline">
-                  <label for="Complemento">Complemento</label>
+                  <label for="Complemento">Complemento*</label>
                   <input bind:value={end.Complemento} id="Complemento" type="text" class="form-control form-control-lg">
                 </div>
               </div>
               
               <div class="col-12 col-md-4">
                 <div class="form-group form-outline">
-                  <label for="Bairro">Bairro</label>
+                  <label for="Bairro">Bairro*</label>
                   <input bind:value={end.Bairro} id="Bairro" type="text" class="form-control form-control-lg">
                 </div>
               </div>
               
               <div class="col-12 col-md-4">
                 <div class="form-group form-outline">
-                  <label for="Cidade">Cidade</label>
+                  <label for="Cidade">Cidade*</label>
                   <input bind:value={end.Cidade} id="Cidade" type="text" class="form-control form-control-lg">
                 </div>
               </div>
               
               <div class="col-12 col-md-4">
                 <div class="form-group form-outline">
-                  <label for="Estado">Estado</label>
+                  <label for="Estado">Estado*</label>
                   <input bind:value={end.Estado} id="Estado" type="text" class="form-control form-control-lg">
                 </div>
               </div>

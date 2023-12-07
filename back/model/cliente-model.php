@@ -10,9 +10,7 @@
 
     }
 
-    public function listarClientes() { 
-        var_dump($_SESSION);
-
+    public function listarClientes() {  
          try {
               if (isset($_SESSION['usuario'])) {
                 $idUser = $_SESSION['usuario']; 
@@ -69,7 +67,7 @@
             $queryCliente->bindParam(':cpf', $dados['Cpf']);
             $queryCliente->bindParam(':rg', $dados['Rg']);
             $queryCliente->bindParam(':telefone', $dados['Telefone']);
-            $queryCliente->bindParam(':idusuario', $_SESSION['user']);
+            $queryCliente->bindParam(':idusuario', $_SESSION['usuario']);
             $queryCliente->execute();
     
              $idCliente = $this->conn->lastInsertId();

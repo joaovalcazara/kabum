@@ -43,6 +43,7 @@
     serviceLogout(); 
     window.location.reload();
    };
+ 
 </script>
 
 <head>
@@ -102,8 +103,8 @@
               {/if}
             {/each}
           {:else}
-            <tr>
-              <td colspan="2" class="text-center">Nenhum cliente encontrado.</td>
+            <tr  class="client-row">
+              <td colspan="2" style="text-align: center;">Nenhum cliente encontrado.</td>
             </tr>
           {/if}
         </tbody>
