@@ -1,5 +1,6 @@
 <script>
    import { cadastrarUsuario} from '../../../services/user.js';
+   import { goto } from "$app/navigation";
 
 
     let userCadastro = {}
@@ -22,6 +23,9 @@
         alert("E-mail já cadastrado!");
       } else if (returnCadastro.data.idUsuario) {
         alert("Cadastro realizado com sucesso!");
+        goto("/login");
+
+        
       } else {
         alert(`Erro no cadastro: ${returnCadastro.message}`);
       }
