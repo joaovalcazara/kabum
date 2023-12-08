@@ -123,13 +123,13 @@ const cadastrar = async () => {
 
         try {
             let res = await serviceCadastrarCliente(cliente);
-
+            console.log(res)
             if (res) {
                  mostrarMensagemSucesso(cliente.acao === "cadastrar" ? "Cliente cadastrado com sucesso!" : "Cliente atualizado com sucesso!"); 
                  sessionStorage.removeItem('idCliente');
                  sessionStorage.setItem('idCliente', JSON.stringify(res.data.idCliente)); 
-                // window.location.reload();
-            }
+                 cliente.idCliente = res.data.idCliente;
+             }
         } catch (error) {
              mostrarMensagemErro(`Erro ao cadastrar/atualizar cliente: ${error.message}`);
         }

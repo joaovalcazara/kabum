@@ -1,5 +1,5 @@
 # kabum
-# 1- Crie uma pasta KABUM dentro de C:\xampp\htdocs e clone o projeto
+# 1- Crie uma pasta KABUM dentro de C:\xampp\htdocs e clone o projeto, apos isso, installe a dependência do svelte no vscode
 # 2- Crie o banco de dados com o nome kabum, caso precise, configure ele na pasta back/config/database.php
 # 3 - Crie as tabelas no banco (Pergutei onde mandar o bd, mas não obtive respostas via e-mail) 
 # TABELA DE CLIENTE
