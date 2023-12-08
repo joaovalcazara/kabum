@@ -37,5 +37,5 @@
 # 4- abra o xampp e de start no apache
 # 5- agora abra o bash (no caminho do projeto), entre em cd front e execute npm install
 # 6- dentro da pasta front, tem o .env (retirei do gitignore) veja se o caminho está correto para o back/api
-# 6- feito isso, de apenas um "npm run dev" para iniciar o projeto
+# 6- feito isso, de apenas um "npm run dev" para iniciar o projeto (Caso npm nao funcione, installe o node.js ultima versao)
 
